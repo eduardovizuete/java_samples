@@ -1,5 +1,6 @@
 package examples.reactive.introduction;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -12,7 +13,6 @@ import reactor.core.scheduler.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 class ReactorIntegrationTest {
@@ -33,7 +33,7 @@ class ReactorIntegrationTest {
                 .subscribe(elements::add);
 
         //assertThat(elements).containsExactly(2, 4, 6, 8);
-        assertThat(elements, contains(2, 4, 6, 8));
+        MatcherAssert.assertThat(elements, contains(2, 4, 6, 8));
     }
 
     @Test
@@ -46,7 +46,7 @@ class ReactorIntegrationTest {
                 .zipWith(Flux.range(0, Integer.MAX_VALUE).log(), (one, two) -> String.format("First Flux: %d, Second Flux: %d", one, two))
                 .subscribe(elements::add);
 
-        assertThat(elements, contains(
+        MatcherAssert.assertThat(elements, contains(
                 "First Flux: 2, Second Flux: 0",
                 "First Flux: 4, Second Flux: 1",
                 "First Flux: 6, Second Flux: 2",
@@ -88,7 +88,7 @@ class ReactorIntegrationTest {
                     }
                 });
 
-        assertThat(elements, contains(1, 2, 3, 4));
+        MatcherAssert.assertThat(elements, contains(1, 2, 3, 4));
     }
 
     @Test
@@ -104,9 +104,9 @@ class ReactorIntegrationTest {
         Thread.sleep(1000);
 
         //assertThat(threadNames).isNotEmpty();
-        assertThat(threadNames, notNullValue());
+        MatcherAssert.assertThat(threadNames, notNullValue());
         //assertThat(threadNames).hasSize(4);
-        assertThat(threadNames, hasSize(4));
+        MatcherAssert.assertThat(threadNames, hasSize(4));
     }
 
     @Test
@@ -119,12 +119,12 @@ class ReactorIntegrationTest {
         publish.subscribe(elements::add);
 
         //assertThat(elements).isEmpty();
-        assertThat(elements, empty());
+        MatcherAssert.assertThat(elements, empty());
 
         publish.connect();
 
         //assertThat(elements).containsExactly(1, 2, 3, 4);
-        assertThat(elements, contains(1, 2, 3, 4));
+        MatcherAssert.assertThat(elements, contains(1, 2, 3, 4));
     }
 
 }
