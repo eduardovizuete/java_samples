@@ -22,3 +22,11 @@ This module contains modules about Spring Reactive
     - Reactive REST Application Using Functional Web 
     - Composing Routes
     - Testing Routes
+
+## Spring 5 WebClient
+
+    - Creating a WebClient Instance
+    - Creating a WebClient Instance With Timeouts
+    - Preparing a Request
+    - Getting a Response
+    - Working With the WebTestClient
