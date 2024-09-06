@@ -42,3 +42,8 @@ This module contains modules about Spring Reactive
     - URI Query Parameters
         - Array Parameters
     - Encoding Mode
+
+## Handling Errors in Spring WebFlux
+
+    - Handling Errors at a Functional Level onErrorReturn - onErrorResume
+    - Handling Errors at a Global Level
