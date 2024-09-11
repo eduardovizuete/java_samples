@@ -12,21 +12,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
-@EnableWebFluxSecurity
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
+@EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class SecurityConfig {
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        return http
-                .authorizeExchange(exchanges  -> exchanges
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        http.authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/admin").hasAuthority("ROLE_ADMIN")
                         .anyExchange().authenticated())
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login"))
-                .csrf(csrf -> csrf.disable())
-                .build();
+                .httpBasic(withDefaults())
+                .formLogin(withDefaults());
+
+        return http.build();
     }
 
     @Bean

@@ -1,0 +1,14 @@
+version: "3.1"
+
+services:
+  mongo:
+    image: mongo:4.4.6
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: change_user
+      MONGO_INITDB_ROOT_PASSWORD: change_pass
+    volumes:
+      - ./db_data/:/data/db/
