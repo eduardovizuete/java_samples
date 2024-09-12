@@ -27,7 +27,10 @@ public class SpringSecurity6Application {
         HttpHandler handler = WebHttpHandlerBuilder.applicationContext(context)
                 .build();
         ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(handler);
-        HttpServer httpServer = HttpServer.create().host("localhost").port(8083);
+        HttpServer httpServer = HttpServer.create()
+                .host("localhost")
+                .port(8083)
+                .wiretap(true);
         return httpServer.handle(adapter).bindNow();
     }
 
